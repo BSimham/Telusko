@@ -60,6 +60,20 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="{% static 'about.html' %}">About Us</a>
             </li>
+            {% if user.is_authenticated%}
+            <h3>Hello, {{user.first_name}}</h3>
+            <li class="nav-item">
+              <a class="nav-link" href='accounts/logout'>LOGOUT</a> 
+            </li>
+            {% else%}
+
+            <li class="nav-item">
+              <a class="nav-link" href='accounts/register'>REGISTER</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href='accounts/login'>LOGIN</a>
+            </li>
+            {% endif%}
             <li class="nav-item">
               <a class="nav-link" href="{% static 'contact.html' %}">Contact Us</a>
             </li>
@@ -105,13 +119,13 @@ https://www.tooplate.com/view/2114-pixie
               {% if 'big' not in it.img%}
               <a href="{% static 'single-product.html' %}">
                 <div class="featured-item">
-                  <img src="{{baseimg}}/{{it.img}}" alt="Item 1">
+                  <img src="{{it.img.url}}" alt="Item 1">
                   <h4>{{it.name}}</h4>
                   <h6>${{it.price}}</h6>
                 </div>
               </a>
               {% endif%}
-              {% endfor %}            
+              {% endfor %}
             </div>
           </div>
         </div>
